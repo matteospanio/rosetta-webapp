@@ -1,0 +1,39 @@
+.vertical-center {
+  margin-left: 10%;
+  margin-right: 10%;
+
+  display: flex;
+  align-items: center;
+}
+
+@keyframes new-elem {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes delete-list {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.deleting {
+  animation-name: delete-list;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+  overflow: hidden;
+}
+
+.list-elem {
+  animation-name: new-elem;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+}
