@@ -2,6 +2,16 @@ from .. import db
 
 
 class List(db.Model):
+    """
+    List Model
+
+    Args:
+        db (SQLAlchemy): SQLAlchemy object
+
+    Returns:
+        List object
+    """
+
     __tablename__ = 'lists'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(64), nullable=False)
@@ -35,6 +45,16 @@ class List(db.Model):
 
 
 class ListItem(db.Model):
+    """
+    ListItem Model
+
+    Args:
+        db (SQLAlchemy): SQLAlchemy object
+
+    Returns:
+        ListItem object
+    """
+
     __tablename__ = 'list_items'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64), nullable=False)

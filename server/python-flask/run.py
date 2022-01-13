@@ -1,10 +1,12 @@
-import os
 from app import create_app, db
 from flask_migrate import Migrate
+from flask_cors import CORS
 
-app = create_app(os.getenv('FLASK_CONFIG') or 'default')
+app = create_app()
+
+# This will enable CORS for all routes
+cors = CORS(app)
 migrate = Migrate(app, db)
-
 
 # make_shell_context dà la possibilità di interfacciarsi con l'applicazione da CLI con il comando flask shell
 # gli oggetti importati nel dizionario saranno visibili nella shell senza dover fare alcun import

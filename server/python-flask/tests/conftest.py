@@ -6,7 +6,8 @@ from app.models.lista import *
 
 @pytest.fixture
 def client():
-    app = create_app('test')
+
+    app = create_app()
 
     with app.test_client() as client:
         with app.app_context():

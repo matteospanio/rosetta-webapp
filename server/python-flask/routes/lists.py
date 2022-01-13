@@ -1,19 +1,19 @@
 from flask import Blueprint, jsonify, request, current_app
 
-from ..models.lista import List, ListItem
-from .. import db
+from app.models.lista import List, ListItem
+from app import db
 
 lists = Blueprint('lists', __name__, url_prefix='/lists')
 
 
-@lists.route('/')
+@lists.get('/')
 def get_lists():
     _lists = List.query.all()
     response = jsonify({'lists': [_list.to_json() for _list in _lists]})
     return response
 
 
-@lists.route('/', methods=['POST'])
+@lists.post('/')
 def create_list():
     if request.json:
         _list = List.from_json(request.json)
@@ -27,13 +27,13 @@ def create_list():
     return response
 
 
-@lists.route('/<list_id>')
+@lists.get('/<list_id>')
 def get_list(list_id):
     single_list = List.query.filter_by(id=list_id).first()
     return jsonify(single_list.to_json())
 
 
-@lists.route('/<list_id>', methods=['DELETE'])
+@lists.delete('/<list_id>')
 def delete_list(list_id):
     single_list = List.query.filter_by(id=list_id).first()
     try:
@@ -48,7 +48,7 @@ def delete_list(list_id):
     return response
 
 
-@lists.route('/<list_id>', methods=['PUT'])
+@lists.put('/<list_id>')
 def update_list(list_id):
     single_list = List.query.filter_by(id=list_id).first()
     datas = request.json
