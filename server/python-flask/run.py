@@ -1,8 +1,12 @@
+import os
+from dotenv import load_dotenv
 from app import create_app, db
 from flask_migrate import Migrate
 from flask_cors import CORS
 
-app = create_app()
+load_dotenv()
+
+app = create_app(os.getenv('FLASK_CONFIG'))
 
 # This will enable CORS for all routes
 cors = CORS(app)
@@ -13,7 +17,6 @@ migrate = Migrate(app, db)
 @app.shell_context_processor
 def make_shell_context():
     return dict(db=db)
-
 
 if __name__ == "__main__":
     app.run()

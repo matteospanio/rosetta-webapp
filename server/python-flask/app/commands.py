@@ -13,7 +13,7 @@ dell'applicazione flask.
 import click
 from flask.cli import with_appcontext
 from . import db
-from . models.lista import List, ListItem
+from .models.List import List
 
 
 @click.command(name='create_tables')

@@ -2,16 +2,16 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 from config.base_config import BasicConfig
-from config.database import DBConfig
+from config.database import config
 
 db = SQLAlchemy()
 
 
-def create_app():
+def create_app(configuration):
     app = Flask(__name__)
 
     app.config.from_object(BasicConfig)
-    app.config.from_object(DBConfig)
+    app.config.from_object(config[configuration])
     db.init_app(app)
 
     from routes import init_routes

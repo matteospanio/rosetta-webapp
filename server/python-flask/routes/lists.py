@@ -1,14 +1,17 @@
-from flask import Blueprint, jsonify, request, current_app
+from flask import Blueprint, jsonify, request, current_app, make_response
 
-from app.models.lista import List, ListItem
+from app.models.List import List
+from app.controller.workers import DatabaseWorker
 from app import db
 
 lists = Blueprint('lists', __name__, url_prefix='/lists')
 
+database = DatabaseWorker()
+
 
 @lists.get('/')
 def get_lists():
-    _lists = List.query.all()
+    _lists = database.get_todo_lists()
     response = jsonify({'lists': [_list.to_json() for _list in _lists]})
     return response
 
@@ -29,7 +32,7 @@ def create_list():
 
 @lists.get('/<list_id>')
 def get_list(list_id):
-    single_list = List.query.filter_by(id=list_id).first()
+    single_list = database.get_todo_list_by_id(list_id)
     return jsonify(single_list.to_json())
 
 
